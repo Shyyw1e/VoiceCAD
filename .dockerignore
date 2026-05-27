@@ -1,0 +1,8 @@
+.git
+.gocache
+bin
+data
+.env
+*.log
+Dockerfile
+docker-compose.yml
