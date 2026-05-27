@@ -1,47 +1,9 @@
 # VoiceCAD Backend
 
 Go backend MVP for VoiceCAD: user auth, task creation, audio/text input, async processing pipeline, file storage, Telegram UX, and integration points for ML and CAD worker services.
-
-## Run Locally
-
-```powershell
-$env:GOCACHE='C:\Users\Shyywie\go_projects\VoiceCAD\.gocache'
-go run ./cmd/voicecad
-```
-
 The service reads `.env` automatically when it exists.
 
-## Docker Compose
-
-```powershell
-docker compose up --build
-```
-
-Compose starts:
-
-- `postgres` on host port `5432`;
-- `app` on host port `8080`.
-
-The app uses `.env`, but inside Docker Compose `POSTGRES_HOST` is overridden to `postgres`.
-Storage and database files are kept in named Docker volumes: `voicecad_app_storage` and `voicecad_postgres_data`.
-
-Useful environment variables:
-
-```env
-HTTP_ADDR=:8080
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-POSTGRES_DB=voicecad
-POSTGRES_SSLMODE=disable
-STORAGE_LOCAL_DIR=data/storage
-ML_TRANSCRIBER_URL=
-ML_PARSER_URL=
-CAD_EXECUTOR_URL=
-TELEGRAM_BOT_TOKEN=
-```
-
+Storage and database files are kept in named Docker volumes: `voicecad_app_storage` and `voicecad_postgres_data`
 PostgreSQL is required on startup. Migrations are embedded into the binary and applied automatically from `internal/postgres/migrations`.
 
 When ML/CAD URLs are empty, the backend runs in demo mode and creates a text result file locally.
